@@ -1,0 +1,73 @@
+﻿@page "/"
+
+<PageTitle>Web Form</PageTitle>
+
+<h1>SQT Web Form</h1>
+<hr />
+<div>
+    <div class="row">
+        <div class="col-md-3">
+            <p>Age</p>
+        </div>
+        <div class="col-md-4">
+            <input id="iAge" placeholder="Enter Age" @bind="@age" />
+        </div>
+    </div>
+    <br />
+    <div class="row">
+        <div class="col-md-3">
+            <p>Location</p>
+        </div>
+        <div class="col-md-4">
+            <input id="iLocation" placeholder="Enter Location" @bind="@location" />
+        </div>
+    </div>
+    <br />
+    <div class="row">
+        <div class="col-md-3">
+            <p>Result</p>
+        </div>
+        <div class="col-md-4">
+            <p id="oResult">@finalresult</p>
+        </div>
+    </div>
+    <br />
+
+        <div class="col-md-2">
+            <button id="btn" @onclick="GetData" class="btn btn-light">Enter</button>
+        </div>
+    </div>
+
+
+
+@code { string age;
+    string location;
+    string finalresult;
+    void GetData()
+    {
+        double inputAge = Convert.ToDouble(age);
+        double premium = 0.0;
+
+        if (location == "rural")
+        {
+            if (inputAge >= 18 && inputAge < 30)
+                premium = 5.0;
+            else if (inputAge >= 31)
+                premium = 2.50;
+        }
+        else if (location == "urban")
+        {
+            if (inputAge >= 18 && inputAge <= 35)
+                premium = 6.0;
+            else if (inputAge >= 36)
+                premium = 5.0;
+        }
+
+        if (inputAge >= 50)
+            premium *= 0.5;
+        
+        finalresult = premium.ToString();
+    }
+
+    }
+
